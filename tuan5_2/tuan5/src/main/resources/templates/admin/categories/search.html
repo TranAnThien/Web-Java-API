@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/Layout-admin.html}" lang="vi">
+<head><title>Tìm kiếm</title></head>
+<body>
+<section layout:fragment="content">
+    <div class="card">
+        <div class="card-header">Tìm kiếm danh mục</div>
+        <div class="card-body">
+            <form class="row g-2 mb-3" th:action="@{/admin/categories/search}" method="get">
+                <div class="col-md-6">
+                    <input class="form-control" name="name" placeholder="Nhập từ khóa…">
+                </div>
+                <div class="col-md-6 text-end">
+                    <button class="btn btn-outline-primary">Tìm</button>
+                    <a class="btn btn-success" th:href="@{/admin/categories/add}">+ Thêm</a>
+                </div>
+            </form>
+
+            <div th:if="${#lists.isEmpty(categories)}" class="empty">Không có kết quả.</div>
+            <div th:unless="${#lists.isEmpty(categories)}" class="table-responsive">
+                <table class="table table-striped">
+                    <thead><tr><th>ID</th><th>Tên</th><th>Ảnh</th></tr></thead>
+                    <tbody>
+                    <tr th:each="c : ${categories}">
+                        <td th:text="${c.id}"></td>
+                        <td th:text="${c.categoryName}"></td>
+                        <td><img th:if="${c.images}" th:src="@{'/images/' + ${c.images}}" style="height:56px;border-radius:6px;"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
