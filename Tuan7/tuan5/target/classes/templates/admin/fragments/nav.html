@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="nav">
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a class="nav-link"
+               th:classappend="${activePage}=='categories' ? ' active' : ''"
+               th:href="@{/admin/categories}">Categories</a>
+            <a class="nav-link"
+               th:classappend="${activePage}=='search' ? ' active' : ''"
+               th:href="@{/admin/categories/searchpaginated}">Search & Paging</a>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/Layout-admin.html}" lang="vi">
+<head>
+  <title>Search & Paging</title>
+</head>
+<body>
+<section layout:fragment="content">
+  <div class="card">
+    <div class="card-header">
+      <span>Danh mục (tìm kiếm & phân trang)</span>
+    </div>
+    <div class="card-body">
+      <div th:if="${message}" class="alert alert-success mb-3" data-auto-dismiss="2200">[[${message}]]</div>
+
+      <!-- Centered search row -->
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <form th:action="@{/admin/categories/searchpaginated}" style="display: flex; gap: 8px; max-width: 340px; justify-content: center;">
+          <input type="text" class="form-control" name="name" th:value="${name}" placeholder="Nhập từ khoá…" style="flex:1; max-width:200px; height:38px; margin-bottom:0;">
+          <button class="btn btn-outline-primary" type="submit" style="height:38px; padding: 0 18px; margin-bottom:0;">Tìm</button>
+        </form>
+        <a class="btn btn-success" th:href="@{/admin/categories/add}" style="align-self: flex-end; margin-top:14px;">+ Thêm</a>
+      </div>
+
+      <div th:if="${categoryPage.totalElements == 0}" class="empty">Không có dữ liệu.</div>
+      <div th:unless="${categoryPage.totalElements == 0}" class="table-responsive" style="margin-top:18px;">
+        <table class="table table-striped">
+          <thead>
+          <tr><th>ID</th><th>Tên</th><th>Ảnh</th></tr>
+          </thead>
+          <tbody>
+          <tr th:each="c : ${categoryPage.content}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.categoryName}"></td>
+            <td>
+              <img th:if="${c.images}" th:src="${c.images}" style="height:56px;border-radius:6px;">
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Footer: Page size bottom left, pagination bottom right -->
+    <div class="card-footer" style="display: flex; justify-content: space-between; align-items: flex-end;">
+      <!-- Page size bottom left -->
+      <form th:action="@{/admin/categories/searchpaginated}" style="display: flex; align-items: center; gap: 6px;">
+        <input type="hidden" name="name" th:value="${name}">
+        <label for="size-bottom-1" style="margin-bottom:0;">Page size:</label>
+        <select class="form-select d-inline-block w-auto" name="size" id="size-bottom-1" onchange="this.form.submit()">
+          <option th:selected="${categoryPage.size == 3}"  value="3">3</option>
+          <option th:selected="${categoryPage.size == 5}"  value="5">5</option>
+          <option th:selected="${categoryPage.size == 10}" value="10">10</option>
+          <option th:selected="${categoryPage.size == 15}" value="15">15</option>
+          <option th:selected="${categoryPage.size == 20}" value="20">20</option>
+        </select>
+      </form>
+      <!-- Pagination bottom right, in a row, no dots, spaced out -->
+      <nav th:if="${categoryPage.totalPages > 0}">
+        <ul class="pagination mb-0" style="display: flex; gap: 14px; list-style: none; padding-left: 0;">
+          <li class="page-item" th:classappend="${1 == categoryPage.number + 1}? 'disabled'">
+            <a class="page-link"
+               th:href="@{/admin/categories/searchpaginated(name=${name},size=${categoryPage.size},page=${1})}">
+              First
+            </a>
+          </li>
+          <li class="page-item"
+              th:each="p : ${pageNumbers}"
+              th:classappend="${p == categoryPage.number + 1} ? 'active'">
+            <a class="page-link"
+               th:href="@{/admin/categories/searchpaginated(name=${name},size=${categoryPage.size},page=${p})}"
+               th:text="${p}">1</a>
+          </li>
+          <li class="page-item"
+              th:classappend="${categoryPage.totalPages == categoryPage.number + 1}? 'disabled'">
+            <a class="page-link"
+               th:href="@{/admin/categories/searchpaginated(name=${name},size=${categoryPage.size},page=${categoryPage.totalPages})}">
+              Last
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>
+</body>
+</html>
