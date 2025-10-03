@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Product Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="auth-header">
+            <i class="fas fa-boxes-stacked fa-2x text-primary mb-3"></i>
+            <h2>Welcome Back!</h2>
+            <p>Sign in to continue to your dashboard.</p>
+        </div>
+        <div class="auth-body">
+            <div th:if="${param.error}" class="alert alert-danger d-flex align-items-center" role="alert">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                <div>Invalid username or password.</div>
+            </div>
+            <div th:if="${param.logout}" class="alert alert-success d-flex align-items-center" role="alert">
+                <i class="fas fa-check-circle me-2"></i>
+                <div>You have been successfully logged out.</div>
+            </div>
+
+            <form th:action="@{/login}" method="post" class="needs-validation" novalidate>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                    <label for="username">Username</label>
+                    <div class="invalid-feedback">Please enter your username.</div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    <label for="password">Password</label>
+                    <div class="invalid-feedback">Please enter your password.</div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">
+                            Remember me
+                        </label>
+                    </div>
+                    <a href="#" class="text-primary text-decoration-none small">Forgot password?</a>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-sign-in-alt me-2"></i> Sign In
+                    </button>
+                </div>
+            </form>
+
+            <div class="text-center mt-4">
+                <p class="text-muted mb-0">Don't have an account?
+                    <a th:href="@{/register}" class="text-primary fw-bold text-decoration-none">Sign Up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/auth.js}" defer></script>
+</body>
+</html>
