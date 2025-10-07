@@ -1,0 +1,160 @@
+/* =================================
+   STYLES CHUNG & LAYOUT CƠ BẢN
+   ================================= */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* =================================
+   TRANG ĐĂNG NHẬP
+   ================================= */
+#username-page {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.username-page-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: inline-block;
+    max-width: 400px;
+    width: 100%;
+}
+
+.username-page-container .title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+/* =================================
+   TRANG CHAT CHÍNH
+   ================================= */
+#chat-page {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.chat-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.chat-header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.chat-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+/* Vùng hiển thị tin nhắn */
+#messageArea {
+    list-style-type: none;
+    padding: 20px;
+    margin: 0;
+    height: 400px;
+    overflow-y: auto;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+
+    /* Kích hoạt Flexbox để căn chỉnh tin nhắn */
+    display: flex;
+    flex-direction: column;
+}
+
+/* =================================
+   ĐỊNH DẠNG CÁC LOẠI TIN NHẮN
+   ================================= */
+
+/* Tin nhắn sự kiện (tham gia/rời phòng) */
+.event-message {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.event-message p {
+    color: #6c757d;
+    font-size: 0.9em;
+    font-style: italic;
+    padding: 5px 0;
+    margin: 0;
+}
+
+/* Base style cho một tin nhắn chat */
+.chat-message {
+    padding: 5px 0;
+    max-width: 80%;
+}
+
+.chat-message .sender {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.chat-message p {
+    margin: 0;
+    padding: 10px 15px;
+    border-radius: 18px;
+    word-wrap: break-word;
+}
+
+/* Tin nhắn của người khác (BÊN TRÁI) */
+.receiver-message {
+    align-self: flex-start; /* Quan trọng: Đẩy tin nhắn về bên trái */
+    text-align: left;
+}
+
+.receiver-message p {
+    background-color: #e9e9eb;
+    color: #000;
+}
+
+/* Tin nhắn của mình (BÊN PHẢI) */
+.sender-message {
+    align-self: flex-end; /* Quan trọng: Đẩy tin nhắn về bên phải */
+    text-align: right;
+}
+
+.sender-message .sender {
+    display: none; /* Không cần hiển thị tên của chính mình */
+}
+
+.sender-message p {
+    background-color: #007bff;
+    color: white;
+}
+
+
+/* =================================
+   FORM NHẬP LIỆU
+   ================================= */
+#messageForm {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.connecting {
+    text-align: center;
+    padding: 15px;
+    color: #6c757d;
+}
